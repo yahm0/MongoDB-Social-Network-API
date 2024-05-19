@@ -36,3 +36,16 @@ const thoughtController = {
             })
             .catch(err => res.status(500).json(err));
     },
+
+
+    // Update a thought by id
+    updateThought(req, res) {
+        Thought.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            .then(thought => {
+                if (!thought) {
+                    return res.status(404).json({ message: 'No thought found with this id!' });
+                }
+                res.json(thought);
+            })
+            .catch(err => res.status(500).json(err));
+    },
