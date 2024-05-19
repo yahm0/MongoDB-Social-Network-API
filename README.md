@@ -24,7 +24,7 @@ Clone the repository and install its dependencies:
 
 ```bash
 git clone git@github.com:yahm0/MongoDB-Social-Network-API.git
-cd social-network-api
+cd mongodb-social-network-api
 npm install
 ```
 
@@ -44,13 +44,13 @@ The application supports several routes for managing users and their interaction
 
 ### Users
 
-- **GET `/api/users`**: Retrieve all users.
+- **GET `/api/users`**: Find all users.
 - **POST `/api/users`**: Create a user.
 - **GET `/api/users/{userId}`**: Retrieve a user by ID.
 - **PUT `/api/users/{userId}`**: Update a user by ID.
 - **DELETE `/api/users/{userId}`**: Delete a user by ID.
 
-### Friendships
+### Friends
 
 - **POST `/api/users/{userId}/friends/{friendId}`**: Add a friend.
 - **DELETE `/api/users/{userId}/friends/{friendId}`**: Remove a friend.
