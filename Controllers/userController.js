@@ -72,3 +72,18 @@ const userController = {
             })
             .catch(err => res.status(500).json(err));
     },
+
+    // Remove a friend
+    removeFriend(req, res) {
+        User.findByIdAndUpdate(req.params.userId, { $pull: { friends: req.params.friendId } }, { new: true })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: 'No user found with this id!' });
+                }
+                res.json(user);
+            })
+            .catch(err => res.status(500).json(err));
+    }
+};
+
+module.exports = userController;
