@@ -44,3 +44,19 @@ const userController = {
             })
             .catch(err => res.status(500).json(err));
     },
+
+
+     // Delete a user and their thoughts
+     deleteUser(req, res) {
+        User.findByIdAndDelete(req.params.id)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: 'No user found with this id!' });
+                }
+                // Optionally delete the user's thoughts
+                Thought.deleteMany({ _id: { $in: user.thoughts } })
+                    .then(() => res.json({ message: 'User and their thoughts deleted!' }))
+                    .catch(err => res.status(500).json(err));
+            })
+            .catch(err => res.status(500).json(err));
+    },
