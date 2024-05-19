@@ -20,3 +20,19 @@ const thoughtController = {
             })
             .catch(err => res.status(500).json(err));
     },
+
+
+    // Create a new thought
+    createThought(req, res) {
+        Thought.create(req.body)
+            .then(thought => {
+                return User.findByIdAndUpdate(req.body.userId, { $push: { thoughts: thought._id } }, { new: true });
+            })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ message: 'Thought created, but no user found with this id!' });
+                }
+                res.json({ message: 'Thought created and added to the user!' });
+            })
+            .catch(err => res.status(500).json(err));
+    },
